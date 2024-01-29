@@ -1,7 +1,5 @@
 **Please refer to the below given steps while you are watching the video so that your application runs successfully on Render**
 
---- Render Deploy Video should be here ----
-
 - Open [Render.com](https://render.com/)
 
 ![Render Dashboard image](assets/image1.png)
@@ -110,4 +108,47 @@ And `Create the Database`
 
 ![Alt text](assets/image21.png)
 
-12:02
+- Add an `Environment variable`
+
+The `Value` field should contain the `Internal Database URL` which you copied to the clipboard
+
+![Alt text](assets/image22.png)
+
+- Now open the `config.json` file and modify the `production` field
+
+```
+"production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres"
+  }
+```
+
+![Alt text](assets/image23.png)
+
+- Now go back to the `Environment variable` interface
+
+The `Key` field should contain
+
+```
+DATABASE_URL
+```
+
+![Alt text](assets/image24.png)
+
+- Now push the changes which you made to `config.json` file to Github
+
+- Now go to **Settings** tab of your `Render Webservice`
+
+![Alt text](assets/image25.png)
+
+- Then scroll down to the `Build Command`
+
+Add this command in the field
+
+```
+npm install && NODE_ENV=production npx sequelize-cli db:migrate
+```
+
+![Alt text](assets/image26.png)
+
+Save the changes
